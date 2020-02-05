@@ -1,28 +1,53 @@
 {
-  "name": "studioroot.unitynpminit",
-  "version": "1.0.0",
-  "description": "Package which modifies a Unity project which has been initialized as a Node package so that it can be distributed using node",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
+  "_from": "github:jordanstudioroot/UnityNPMInit",
+  "_id": "studioroot.unitynpminit@1.0.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/studioroot.unitynpminit",
+  "_phantomChildren": {},
+  "_requested": {
     "type": "git",
-    "url": "git+https://github.com/jordanstudioroot/UnityNPMInit.git"
+    "raw": "github:jordanstudioroot/UnityNPMInit",
+    "rawSpec": "github:jordanstudioroot/UnityNPMInit",
+    "saveSpec": "github:jordanstudioroot/UnityNPMInit",
+    "fetchSpec": null,
+    "gitCommittish": null
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "github:jordanstudioroot/UnityNPMInit#1fe454dc77da7244b47a99dc0ac05ba761e184a1",
+  "_spec": "github:jordanstudioroot/UnityNPMInit",
+  "_where": "/mnt/c/users/jnelsis/home/repos/npminittest",
+  "author": {
+    "name": "jordannelson@protonmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jordanstudioroot/UnityNPMInit/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0"
+  },
+  "deprecated": false,
+  "description": "Package which modifies a Unity project which has been initialized as a Node package so that it can be distributed using node",
+  "homepage": "https://github.com/jordanstudioroot/UnityNPMInit#readme",
   "keywords": [
     "unity",
     "npm",
     "init"
   ],
-  "author": "jordannelson@protonmail.com",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jordanstudioroot/UnityNPMInit/issues"
+  "main": "app.js",
+  "name": "studioroot.unitynpminit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordanstudioroot/UnityNPMInit.git"
   },
-  "homepage": "https://github.com/jordanstudioroot/UnityNPMInit#readme",
-  "dependencies": {
-    "ncp": "^2.0.0",
-    "mkdirp": "^0.5.1"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
 }
