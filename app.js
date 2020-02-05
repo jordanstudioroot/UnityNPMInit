@@ -1,3 +1,5 @@
+console.log("Initializing Unity project as npm package.");
+
 let fs = require('fs');
 let mkdirp = require('mkdirp');
 let path = require('path');
