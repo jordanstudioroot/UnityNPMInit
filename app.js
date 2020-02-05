@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 console.log("Initializing Unity project as npm package.");
 
 let fs = require('fs');
