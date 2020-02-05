@@ -3,7 +3,7 @@ const mkdirp = require("mkdirp");
 
 let args = process.argv.slice(2);
 
-const packageName;
+const packageName = "";
 
 if (args[0]) {
     packageName = args[0];    
