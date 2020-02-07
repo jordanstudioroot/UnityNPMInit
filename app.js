@@ -105,7 +105,7 @@ if (!packageJSON.scripts) {
     };
 }
 else {
-    packageJSON.scripts['postinstall'] = 'node scripts/postinstall.js';
+    packageJSON.scripts['postinstall'] = 'node scripts/postinstall.js ' + packageName;
 }
 
 // dependencies
