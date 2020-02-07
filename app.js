@@ -4,7 +4,7 @@ let fs = require('fs');
 let mkdirp = require('mkdirp');
 let path = require('path');
 
-console.log("Initializing Unity project as npm package.");
+console.log('Initializing Unity project as npm package.');
 
 // Get package root directory and file name
 let rootDir = process.cwd();
@@ -12,14 +12,14 @@ let rootFile = path.basename(rootDir);
 
 // Get package name
 let args = process.argv.slice(2);
-let packageName = "";
+let packageName = '';
 
 if (args[0]) {
     packageName = args[0];    
 }
 else {
-    console.log("Package name not provided. Setting package name to "
-        + " project root file name.");
+    console.log('Package name not provided. Setting package name to '
+        + ' project root file name.');
     packageName = rootFile;
 }
 
@@ -27,8 +27,8 @@ else {
 const dirSrc = path.join(rootDir, 'Assets', packageName);
 
 if (!fs.existsSync(dirSrc)) {
-    console.log("Source directory, " + dirSrc + " not found. Creating"
-        + " source directory.");
+    console.log('Source directory, ' + dirSrc + ' not found. Creating'
+        + ' source directory.');
 	mkdirp(dirSrc, function(err) {
         if (err) {
             console.error(err);
@@ -38,23 +38,22 @@ if (!fs.existsSync(dirSrc)) {
 }
 
 // Get or create package.json
-const dirJSON = "";
+const dirJSON = path.join(rootDir, 'package.json');
+let packageJSON = {};
 
-if (fs.existsSync(path.join(rootDir, 'package.json'))) {
+if (fs.existsSync(dirJSON)) {
     packageJSON = JSON.parse(
-        fs.readFileSync(
-            path.join(
-                rootDir, 
-                'package.json'
-            )
-        )
+        fs.readFileSync(dirJSON)
     );
 }
 else {
-    packageJSON = {
-        name: packageName.toString()
-    };
+    fs.writeFileSync(
+        dirJSON,
+        ''
+    );
 }
+
+packageJSON['name'] = packageName;
 
 // create scripts folder
 
@@ -69,15 +68,18 @@ else {
 // add file list to package.json
 if (packageJSON.files) {
     packageJSON.files.push('Assets/' + packageName);
+    packageJSON.files.push('scripts');
 }
 else {
-    packageJSON['files'] = [];
-    packageJSON['files'].push("Assets/" + packageName);
+    packageJSON['files'] = [
+        'Assets/' + packageName,
+        'scripts'
+    ];
 }
 
 // dependencies
 if (!packageJSON.dependencies) {
-    packageJSON["dependencies"] = [];
+    packageJSON['dependencies'] = [];
 }
 
 packageJSON.dependencies['ncp'] = '^2.0.0';
