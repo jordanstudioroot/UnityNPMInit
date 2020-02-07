@@ -99,9 +99,18 @@ else {
     ];
 }
 
+if (!packageJSON.scripts) {
+    packageJSON.scripts = {
+        'postinstall':'node scripts/postinstall.js'
+    };
+}
+else {
+    packageJSON.scripts['postinstall'] = 'node scripts/postinstall.js';
+}
+
 // dependencies
 if (!packageJSON.dependencies) {
-    packageJSON['dependencies'] = [];
+    packageJSON['dependencies'] = {};
 }
 
 packageJSON.dependencies['ncp'] = '^2.0.0';
