@@ -64,6 +64,12 @@ if (!fs.existsSync(dirLocalScripts)) {
     fs.mkdirSync(dirLocalScripts);
 }
 
+if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
+    fs.writeFileSync(
+        path.join(dirLocalScripts, 'postinstall.js')
+    );
+}
+
 fs.copyFileSync(
     path.join(
         dirPkgScripts, 'postinstall.js'
