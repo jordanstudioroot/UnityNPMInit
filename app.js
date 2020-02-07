@@ -43,7 +43,10 @@ const dirJSON = "";
 if (fs.existsSync(path.join(rootDir, 'package.json'))) {
     packageJSON = JSON.parse(
         fs.readFileSync(
-            rootDir, "package.json"
+            path.join(
+                rootDir, 
+                'package.json'
+            )
         )
     );
 }
