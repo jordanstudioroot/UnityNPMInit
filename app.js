@@ -121,7 +121,7 @@ fs.writeFileSync(dirJSON, JSON.stringify(packageJSON));
 
 // write gitignore
 fs.copyFileSync(
-    path.join(__name, 'newgitignore'),
+    path.join(__dirname, 'newgitignore'),
     path.join(rootDir, '.gitignore')
 );
 
