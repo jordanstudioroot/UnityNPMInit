@@ -22,9 +22,8 @@ else {
 const dirSrc = path.join(__dirname, '..', '..', 'Assets', packageName);
 
 // verify project directory structure
-console.log(dirSrc);
 if (!fs.existsSync(dirSrc)) {
-    console.log("Source directory, " _+ dirSrc + " not found. Creating"
+    console.log("Source directory, " + dirSrc + " not found. Creating"
         + " source directory.");
 	mkdirp(dirSrc, function(err) {
         if (err) {
