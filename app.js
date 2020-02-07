@@ -54,6 +54,7 @@ else {
 }
 
 packageJSON['name'] = packageName;
+packageJSON['version'] = '1.0.0';
 
 // create scripts folder
 const dirLocalScripts = path.join(rootDir, 'scripts');
