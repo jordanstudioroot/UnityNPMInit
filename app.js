@@ -56,6 +56,13 @@ else {
 packageJSON['name'] = packageName;
 
 // create scripts folder
+const dirScripts = path.join(rootDir, 'scripts')
+if (fs.existsSync(dirScripts)) {
+    // add script to scripts dir
+}
+else {
+    fs.mkdirSync(dirScripts);
+}
 
 // copy postinstall.js to scripts folder
 
