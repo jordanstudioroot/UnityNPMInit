@@ -119,6 +119,12 @@ packageJSON.dependencies['mkdirp'] = '^0.5.1';
 // write edits to package.json
 fs.writeFileSync(dirJSON, JSON.stringify(packageJSON));
 
+// write gitignore
+fs.copyFileSync(
+    path.join(__name, 'newgitignore'),
+    path.join(rootDir, '.gitignore')
+);
+
 
 
 
