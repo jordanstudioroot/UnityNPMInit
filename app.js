@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 console.log("Initializing Unity project as npm package.");
+console.log(process.cwd());
 
 let fs = require('fs');
 let mkdirp = require('mkdirp');
