@@ -22,10 +22,10 @@ else {
 const dirSrc = path.join(__dirname, '..', '..', 'Assets', packageName);
 
 // verify project directory structure
-
 console.log(dirSrc);
 if (!fs.existsSync(dirSrc)) {
-    console.log("dir not found");
+    console.log("Source directory, " _+ dirSrc + " not found. Creating"
+        + " source directory.");
 	mkdirp(dirSrc, function(err) {
         if (err) {
             console.error(err);
@@ -34,25 +34,26 @@ if (!fs.existsSync(dirSrc)) {
     });
 }
 
-console.log("Aw shit.");
-
-// edit package.json
-packageJSON = JSON.parse(
-    fs.readFileSync(
-        dirJSON
-    )
-);
-
-if (!packageJSON) {
-    console.log("package.json could not be found. Has npm init been run at the"
-        + "root of the Unity project?");
+// get package.json as object if it exists
+if (fs.existsSync(dirJSON)) {
+    packageJSON = JSON.parse(
+        fs.readFileSync(
+            dirJSON
+        )
+    );
+}
+// else create new object for package.json
+else {
+    packageJSON = {
+        name: packageName.toString()
+    };
 }
 
-//scripts
+// set postinstall script for unity package
 packageJSON.scripts["postinstall"] =
     "node scripts/postinstall.js " + packageName.toString();
 
-// files
+// add file list to package.json
 if (packageJSON.files) {
     packageJSON.files.push("Assets/" + packageName);
 }
@@ -65,6 +66,7 @@ else {
 packageJSON.dependencies["ncp"] = "^2.0.0";
 packageJSON.dependencies["mkdirp"] = "^0.5.1";
 
+// write edits to package.json
 fs.writeFileSync(dirJSON, JSON.stringify(packageJSON));
 
 
