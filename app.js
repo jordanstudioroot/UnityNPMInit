@@ -76,6 +76,10 @@ else {
 }
 
 // dependencies
+if (!packageJSON.dependencies) {
+    package.json.push({"dependencies" : []})
+}
+
 packageJSON.dependencies['ncp'] = '^2.0.0';
 packageJSON.dependencies['mkdirp'] = '^0.5.1';
 
