@@ -77,7 +77,7 @@ else {
 
 // dependencies
 if (!packageJSON.dependencies) {
-    package.json.push({"dependencies" : []})
+    packageJSON.push({"dependencies" : []})
 }
 
 packageJSON.dependencies['ncp'] = '^2.0.0';
