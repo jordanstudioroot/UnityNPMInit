@@ -24,10 +24,11 @@ Unity NPM Init automatically creates a `.gitignore` designed to make the project
 - Provide `[project name]` argument to avoid naming collisions.
 
 ## TODO
-- Set project name argument in `postinstall.js` script.
-- Official windows command line support.
-- More robust cli.
- - Verbose and silent modes.
+- [ ] Set project name argument in `postinstall.js` script.
+- [ ] Official windows command line support.
+- [ ] More robust cli.
+- [ ] Verbose and silent modes.
+- [ ] Better formatting for generated package.json.
 
 ## Criticisms, Suggestions, Pull Requests
 Email: [jordannelson@protonmail.com](mailto:jordannelson@protonmail.com)
