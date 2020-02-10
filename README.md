@@ -26,7 +26,8 @@ Unity NPM Init automatically creates a `.gitignore` designed to make the project
 ## TODO
 - [ ] Set project name argument in `postinstall.js` script.
 - [ ] Official windows command line support.
-- [ ] More robust cli.
+- [ ] Cli interface for specifying version, description, and license.
+- [ ] Cli interface for specifying alternative folders to use for source code instead of `./Assets/[package name]`.
 - [ ] Verbose and silent modes.
 - [ ] Better formatting for generated package.json.
 
