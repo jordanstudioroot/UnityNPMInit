@@ -115,10 +115,25 @@ fs.copyFileSync(
 
 // add file list to package.json
 if (packageJSON.files) {
-    packageJSON.files.push('Assets/' + packageName);
-    packageJSON.files.push('scripts');
+    // Declare required file names.
+    let packageFile = 'Assets/' + packageName;
+    let scriptsFile = 'scripts';
+
+    // Check if sub-fields already exist in files.
+    let filesHasPackage = packageJSON.files.indexOf(packageFile);
+    let filesHasScripts = packageJSON.files.indexOf(scriptsFile);
+
+    // Push file name to files field if not present.
+    if (!filesHasPackage) {
+        packageJSON.files.push('Assets/' + packageName);        
+    }
+
+    if (!filesHasScripts) {
+        packageJSON.files.push('scripts');
+    }
 }
 else {
+    // Else create files field.
     packageJSON['files'] = [
         'Assets/' + packageName,
         'scripts'
@@ -127,7 +142,7 @@ else {
 
 if (!packageJSON.scripts) {
     packageJSON.scripts = {
-        'postinstall':'node scripts/postinstall.js'
+        'postinstall':'node scripts/postinstall.js ' + packageName
     };
 }
 else {
