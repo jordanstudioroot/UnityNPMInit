@@ -21,8 +21,13 @@ if (!fs.existsSync(dirLocalScripts)) {
 
 // create postinstall script
 if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
-    fs.writeFileSync(
-        path.join(dirLocalScripts, 'postinstall.js')
+    fs.copyFileSync(
+        path.join(
+            dirPkgScripts, 'postinstall.js'
+        ),
+        path.join(
+            dirLocalScripts, 'postinstall.js'
+        )
     );
 }
 else {
@@ -34,9 +39,14 @@ else {
     rl.question("/scripts/postinstall.js found. Overwrite?" +
         "\n\t Y[es]/N[o] (No will abort initialization.)",
     (answer) => {
-        if (`${answer}`.match('^Y')) {
-            fs.writeFileSync(
-                path.join(dirLocalScripts, 'postinstall.js')
+        if (`${answer}`.match('^[Yy]')) {
+            fs.copyFileSync(
+                path.join(
+                    dirPkgScripts, 'postinstall.js'
+                ),
+                path.join(
+                    dirLocalScripts, 'postinstall.js'
+                )
             );
         }
         else {
@@ -95,15 +105,6 @@ else {
 packageJSON['name'] = packageName;
 packageJSON['version'] = '1.0.0';
 
-
-fs.copyFileSync(
-    path.join(
-        dirPkgScripts, 'postinstall.js'
-    ),
-    path.join(
-        dirLocalScripts, 'postinstall.js'
-    )
-);
 
 // copy postinstall.js to scripts folder
 
