@@ -30,6 +30,7 @@ Unity NPM Init automatically creates a `.gitignore` designed to make the project
 - [ ] Cli interface for specifying alternative folders to use for source code instead of `./Assets/[package name]`.
 - [ ] Verbose and silent modes.
 - [ ] Better formatting for generated package.json.
+- [ ] Auto-cleanup installed dependencies from node_modules
 
 ## Criticisms, Suggestions, Pull Requests
 Email: [jordannelson@protonmail.com](mailto:jordannelson@protonmail.com)
