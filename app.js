@@ -16,34 +16,34 @@ const dirLocalScripts = path.join(rootDir, 'scripts');
 const dirPkgScripts = path.join(__dirname, 'scripts');
 
 if (!fs.existsSync(dirLocalScripts)) {
-    // add script to scripts dir
     fs.mkdirSync(dirLocalScripts);
+}
 
-    if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
-        fs.writeFileSync(
-            path.join(dirLocalScripts, 'postinstall.js')
-        );
-    }
-    else {
-        let rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
-    
-        rl.question("/scripts/postinstall.js found. Overwrite?" +
-            "\n\t Y[es]/N[o] (No will abort initialization.)",
-        (answer) => {
-            if (`${answer}`.match('^Y')) {
-                fs.writeFileSync(
-                    path.join(dirLocalScripts, 'postinstall.js')
-                );
-            }
-            else {
-                console.log('Aborting initialization.');
-                process.exit(1);
-            }
-        });
-    }
+// create postinstall script
+if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
+    fs.writeFileSync(
+        path.join(dirLocalScripts, 'postinstall.js')
+    );
+}
+else {
+    let rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("/scripts/postinstall.js found. Overwrite?" +
+        "\n\t Y[es]/N[o] (No will abort initialization.)",
+    (answer) => {
+        if (`${answer}`.match('^Y')) {
+            fs.writeFileSync(
+                path.join(dirLocalScripts, 'postinstall.js')
+            );
+        }
+        else {
+            console.log('Aborting initialization.');
+            process.exit(1);
+        }
+    });
 }
 
 // Get package name
