@@ -41,8 +41,11 @@ else {
         }
         else {
             console.log('Aborting initialization.');
+            rl.close();
             process.exit(1);
         }
+
+        rl.close();
     });
 }
 
