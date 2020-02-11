@@ -3,12 +3,48 @@
 let fs = require('fs');
 let mkdirp = require('mkdirp');
 let path = require('path');
+let readline = require('readline');
 
 console.log('Initializing Unity project as npm package.');
 
 // Get package root directory and file name
 let rootDir = process.cwd();
 let rootFile = path.basename(rootDir);
+
+// create scripts folder
+const dirLocalScripts = path.join(rootDir, 'scripts');
+const dirPkgScripts = path.join(__dirname, 'scripts');
+
+if (!fs.existsSync(dirLocalScripts)) {
+    // add script to scripts dir
+    fs.mkdirSync(dirLocalScripts);
+
+    if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
+        fs.writeFileSync(
+            path.join(dirLocalScripts, 'postinstall.js')
+        );
+    }
+    else {
+        let rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+    
+        rl.question("/scripts/postinstall.js found. Overwrite?" +
+            "\n\t Y[es]/N[o] (No will abort initialization.)",
+        (answer) => {
+            if (`${answer}`.match('^Y')) {
+                fs.writeFileSync(
+                    path.join(dirLocalScripts, 'postinstall.js')
+                );
+            }
+            else {
+                console.log('Aborting initialization.');
+                process.exit(1);
+            }
+        });
+    }
+}
 
 // Get package name
 let args = process.argv.slice(2);
@@ -56,20 +92,6 @@ else {
 packageJSON['name'] = packageName;
 packageJSON['version'] = '1.0.0';
 
-// create scripts folder
-const dirLocalScripts = path.join(rootDir, 'scripts');
-const dirPkgScripts = path.join(__dirname, 'scripts');
-
-if (!fs.existsSync(dirLocalScripts)) {
-    // add script to scripts dir
-    fs.mkdirSync(dirLocalScripts);
-}
-
-if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
-    fs.writeFileSync(
-        path.join(dirLocalScripts, 'postinstall.js')
-    );
-}
 
 fs.copyFileSync(
     path.join(
