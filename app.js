@@ -3,12 +3,61 @@
 let fs = require('fs');
 let mkdirp = require('mkdirp');
 let path = require('path');
+let readline = require('readline');
 
 console.log('Initializing Unity project as npm package.');
 
 // Get package root directory and file name
 let rootDir = process.cwd();
 let rootFile = path.basename(rootDir);
+
+// create scripts folder
+const dirLocalScripts = path.join(rootDir, 'scripts');
+const dirPkgScripts = path.join(__dirname, 'scripts');
+
+if (!fs.existsSync(dirLocalScripts)) {
+    fs.mkdirSync(dirLocalScripts);
+}
+
+// create postinstall script
+if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
+    fs.copyFileSync(
+        path.join(
+            dirPkgScripts, 'postinstall.js'
+        ),
+        path.join(
+            dirLocalScripts, 'postinstall.js'
+        )
+    );
+}
+else {
+    let rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+
+    rl.question("/scripts/postinstall.js found. Overwrite?" +
+        "\n\t Y[es]/N[o] (No will abort initialization.)",
+    (answer) => {
+        if (`${answer}`.match('^[Yy]')) {
+            fs.copyFileSync(
+                path.join(
+                    dirPkgScripts, 'postinstall.js'
+                ),
+                path.join(
+                    dirLocalScripts, 'postinstall.js'
+                )
+            );
+        }
+        else {
+            console.log('Aborting initialization.');
+            rl.close();
+            process.exit(1);
+        }
+
+        rl.close();
+    });
+}
 
 // Get package name
 let args = process.argv.slice(2);
@@ -56,29 +105,6 @@ else {
 packageJSON['name'] = packageName;
 packageJSON['version'] = '1.0.0';
 
-// create scripts folder
-const dirLocalScripts = path.join(rootDir, 'scripts');
-const dirPkgScripts = path.join(__dirname, 'scripts');
-
-if (!fs.existsSync(dirLocalScripts)) {
-    // add script to scripts dir
-    fs.mkdirSync(dirLocalScripts);
-}
-
-if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
-    fs.writeFileSync(
-        path.join(dirLocalScripts, 'postinstall.js')
-    );
-}
-
-fs.copyFileSync(
-    path.join(
-        dirPkgScripts, 'postinstall.js'
-    ),
-    path.join(
-        dirLocalScripts, 'postinstall.js'
-    )
-);
 
 // copy postinstall.js to scripts folder
 
@@ -90,10 +116,25 @@ fs.copyFileSync(
 
 // add file list to package.json
 if (packageJSON.files) {
-    packageJSON.files.push('Assets/' + packageName);
-    packageJSON.files.push('scripts');
+    // Declare required file names.
+    let packageFile = 'Assets/' + packageName;
+    let scriptsFile = 'scripts';
+
+    // Check if sub-fields already exist in files.
+    let filesHasPackage = packageJSON.files.indexOf(packageFile);
+    let filesHasScripts = packageJSON.files.indexOf(scriptsFile);
+
+    // Push file name to files field if not present.
+    if (!filesHasPackage) {
+        packageJSON.files.push('Assets/' + packageName);        
+    }
+
+    if (!filesHasScripts) {
+        packageJSON.files.push('scripts');
+    }
 }
 else {
+    // Else create files field.
     packageJSON['files'] = [
         'Assets/' + packageName,
         'scripts'
@@ -102,7 +143,7 @@ else {
 
 if (!packageJSON.scripts) {
     packageJSON.scripts = {
-        'postinstall':'node scripts/postinstall.js'
+        'postinstall':'node scripts/postinstall.js ' + packageName
     };
 }
 else {
