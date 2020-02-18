@@ -11,7 +11,7 @@ console.log('Initializing Unity project as npm package.');
 let rootDir = process.cwd();
 let rootFile = path.basename(rootDir);
 
-// create scripts folder
+// Create scripts folder if none exists.
 const dirLocalScripts = path.join(rootDir, 'scripts');
 const dirPkgScripts = path.join(__dirname, 'scripts');
 
@@ -19,7 +19,7 @@ if (!fs.existsSync(dirLocalScripts)) {
     fs.mkdirSync(dirLocalScripts);
 }
 
-// create postinstall script
+// Create postinstall script.
 if (!fs.existsSync(path.join(dirLocalScripts, 'postinstall.js'))) {
     fs.copyFileSync(
         path.join(
@@ -37,7 +37,7 @@ else {
     });
 
     rl.question("/scripts/postinstall.js found. Overwrite?" +
-        "\n\t Y[es]/N[o] (No will abort initialization.)",
+        "\n\t Y[es]/N[o] (No will abort initialization."),
     (answer) => {
         if (`${answer}`.match('^[Yy]')) {
             fs.copyFileSync(
@@ -56,7 +56,7 @@ else {
         }
 
         rl.close();
-    });
+    };
 }
 
 // Get package name
@@ -105,20 +105,11 @@ else {
 packageJSON['name'] = packageName;
 packageJSON['version'] = '1.0.0';
 
-
-// copy postinstall.js to scripts folder
-
-// set postinstall script for unity package
-
-/*packageJSON.scripts["postinstall"] =
-    "node scripts/postinstall.js " + packageName.toString();
-*/
-
 // add file list to package.json
+let packageFile = 'Assets/' + packageName;
+let scriptsFile = 'scripts';
+
 if (packageJSON.files) {
-    // Declare required file names.
-    let packageFile = 'Assets/' + packageName;
-    let scriptsFile = 'scripts';
 
     // Check if sub-fields already exist in files.
     let filesHasPackage = packageJSON.files.indexOf(packageFile);
@@ -126,21 +117,22 @@ if (packageJSON.files) {
 
     // Push file name to files field if not present.
     if (!filesHasPackage) {
-        packageJSON.files.push('Assets/' + packageName);        
+        packageJSON.files.push(packageFile);        
     }
 
     if (!filesHasScripts) {
-        packageJSON.files.push('scripts');
+        packageJSON.files.push(scriptsFile);
     }
 }
 else {
-    // Else create files field.
+    // Else refresh files field.
     packageJSON['files'] = [
-        'Assets/' + packageName,
-        'scripts'
+        packageFile,
+        scriptsFile
     ];
 }
 
+// add postinstall script
 if (!packageJSON.scripts) {
     packageJSON.scripts = {
         'postinstall':'node scripts/postinstall.js ' + packageName
@@ -150,7 +142,7 @@ else {
     packageJSON.scripts['postinstall'] = 'node scripts/postinstall.js ' + packageName.toString();
 }
 
-// dependencies
+// add default dependencies
 if (!packageJSON.dependencies) {
     packageJSON['dependencies'] = {};
 }
