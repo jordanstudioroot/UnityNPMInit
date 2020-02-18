@@ -37,26 +37,27 @@ else {
     });
 
     rl.question("/scripts/postinstall.js found. Overwrite?" +
-        "\n\t Y[es]/N[o] (No will abort initialization."),
-    (answer) => {
-        if (`${answer}`.match('^[Yy]')) {
-            fs.copyFileSync(
-                path.join(
-                    dirPkgScripts, 'postinstall.js'
-                ),
-                path.join(
-                    dirLocalScripts, 'postinstall.js'
-                )
-            );
-        }
-        else {
-            console.log('Aborting initialization.');
-            rl.close();
-            process.exit(1);
-        }
+        "\n\t Y[es]/N[o] (No will abort initialization.",
+        (answer) => {
+            if (`${answer}`.match('^[Yy]')) {
+                fs.copyFileSync(
+                    path.join(
+                        dirPkgScripts, 'postinstall.js'
+                    ),
+                    path.join(
+                        dirLocalScripts, 'postinstall.js'
+                    )
+                );
+            }
+            else {
+                console.log('Aborting initialization.');
+                rl.close();
+                process.exit(1);
+            }
 
-        rl.close();
-    };
+            rl.close();
+        }
+    );
 }
 
 // Get package name
