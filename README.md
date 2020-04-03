@@ -24,6 +24,7 @@ Unity NPM Init automatically creates a `.gitignore` designed to make the project
 - Provide `[project name]` argument to avoid naming collisions.
 
 ## TODO
+- [ ] Generate .asmdef files automatically based on dependencies in package.json
 - [ ] Set project name argument in `postinstall.js` script.
 - [ ] Official windows command line support.
 - [ ] Cli interface for specifying version, description, and license.
