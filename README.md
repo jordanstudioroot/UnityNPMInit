@@ -1,7 +1,7 @@
 ## Unity NPM Init
 A lightweight NPM package which initializes an existing Unity project as an NPM package for use as a dependency in another Unity project.
 
-This package is being actively developed with the goal of making it easy manage dependencies using Github and NPM as an alternative to the [Unity Package Manager](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@1.8/manual/index.html) for those who want a more transparent and flexible solution for managing dependencies between different Unity projects.
+This package is being actively developed with the goal of making it easy manage dependencies using Github and NPM as an alternative to the [Unity Package Manager](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@1.8/manual/index.html), for those who want a more transparent and flexible solution for managing dependencies between different Unity projects.
 
 ## Requirements
 - Linux or [Windows Subsystem For Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
@@ -11,17 +11,16 @@ This package is being actively developed with the goal of making it easy manage 
 Install package locally and run `node_modules\studioroot.unitynpminit\app.js [project name]` or install npx and run `npx github:jordanstudioroot/UnityNPMInit [project name]`
 
 ### Notes on NPX in the Windows command line.
-Currently not official supported via node from the Windows command line. However, you can use [Windows Subsystem For Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10), cd into `./mnt/c/path/to/unity/project` and follow the current usage guide.
+Currently not officialy supported via node from the Windows command line. However, you can use [Windows Subsystem For Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10), cd into `./mnt/c/path/to/unity/project` and follow the current usage guide.
 
 ## Package Source Directory
-For the initialized project, assets under `Assets/[project name]` are considered to be the package source code where `[project name]` is the argument provided when the script is run. If `[project name]` is not provided, the name of the projects root directory is used by default.
-
+For the initialized project, assets under `Assets/[project name]` are considered to be the package source code where `[project name]` is the argument provided when the script is run. If `[project name]` is not provided, the name of the project's root directory is used by default.
 
 ## Package As A Git Repository
-Unity NPM Init automatically creates a `.gitignore` designed to make the project easy to initialize as a git repository.
+UnityNPMInit automatically creates a `.gitignore` designed to make the project easy to initialize as a git repository.
 
 ## Recommendations
-- Provide `[project name]` argument to avoid naming collisions.
+- Provide unique `[project name]` argument to avoid naming collisions.
 
 ## TODO
 - [ ] Generate .asmdef files automatically based on dependencies in package.json
@@ -36,7 +35,5 @@ Unity NPM Init automatically creates a `.gitignore` designed to make the project
 ## Criticisms, Suggestions, Pull Requests
 Email: [jordannelson@protonmail.com](mailto:jordannelson@protonmail.com)
 
-[Pull Requests](https://github.com/jordanstudioroot/UnityNPMInit/pulls)
-
 ## Bugs
-Report on [issues](https://github.com/jordanstudioroot/UnityNPMInit/issues).
+Report on [issues](https://github.com/jordanstudioroot/UnityNPMInit/issues) page.
