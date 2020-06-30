@@ -1,5 +1,5 @@
 ## Unity NPM Init
-A lightweight NPM package which automatically initializes an existing Unity project as an NPM package which can be easily used as a dependency in another Unity project.
+A lightweight NPM package which automatically initializes an existing Unity project as an NPM package for as a dependency in another Unity project.
 
 This package is being actively developed with the goal of making it easy manage dependencies using Github and NPM as an alternative to the [Unity Package Manager](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@1.8/manual/index.html) for those who want a more transparent and flexible solution for managing dependencies between different Unity projects.
 
